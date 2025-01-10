@@ -1,9 +1,7 @@
-package com.verticalcoding.data.local.di
+package com.verticalcoding.dogs.data.local.di
 
 import android.content.Context
 import androidx.room.Room
-import com.verticalcoding.data.local.database.AppDatabase
-import com.verticalcoding.data.local.database.DogDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,16 +16,16 @@ import javax.inject.Singleton
 class DatabaseModule {
 
     @Provides
-    fun provideDogDao(appDatabase: AppDatabase): DogDao {
+    fun provideDogDao(appDatabase: com.verticalcoding.dogs.data.local.database.AppDatabase): com.verticalcoding.dogs.data.local.database.DogDao {
         return appDatabase.dogDao()
     }
 
     @Provides
     @Singleton
-    fun provideAppDatabase(@ApplicationContext appContext: Context): AppDatabase {
+    fun provideAppDatabase(@ApplicationContext appContext: Context): com.verticalcoding.dogs.data.local.database.AppDatabase {
        return Room.databaseBuilder(
            appContext,
-           AppDatabase::class.java,
+           com.verticalcoding.dogs.data.local.database.AppDatabase::class.java,
            "DogsDB"
        ).build()
     }

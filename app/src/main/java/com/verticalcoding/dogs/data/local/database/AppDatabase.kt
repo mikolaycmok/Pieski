@@ -1,4 +1,4 @@
-package com.verticalcoding.data.local.database
+package com.verticalcoding.dogs.data.local.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
