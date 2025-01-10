@@ -1,6 +1,7 @@
 package com.verticalcoding.dogs.data.local.database
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Entity
 import androidx.room.Insert
 import androidx.room.PrimaryKey
@@ -28,4 +29,7 @@ interface DogEntityDao {
 
     @Insert
     suspend fun insertDog(dog: DogEntity)
+    
+    @Query("DELETE FROM dogs WHERE uid = :id")
+    suspend fun removeDog(id: Int)
 }

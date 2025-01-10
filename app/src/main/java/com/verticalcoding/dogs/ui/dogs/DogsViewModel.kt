@@ -33,7 +33,9 @@ class DogsViewModel @Inject constructor(
     }
 
     fun removeDog(id: Int) {
-
+        viewModelScope.launch {
+            dogRepository.remove(id)
+        }
     }
 }
 

@@ -31,7 +31,9 @@ import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
@@ -63,7 +65,7 @@ internal fun DogsTypeScreen(
     onRowClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Column(modifier) {
+    Column(modifier, verticalArrangement = Arrangement.spacedBy(8.dp)) {
         var dog by remember { mutableStateOf("Czarek") }
         Row(
             modifier = Modifier.fillMaxWidth().padding(bottom = 24.dp),
@@ -96,7 +98,8 @@ internal fun DogsTypeScreen(
                 Column(
                     horizontalAlignment = Alignment.Start
                 ) {
-                    Text(it.name)
+                    Text(it.name, fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
+                    Text(it.breed, fontSize = 12.sp, fontWeight = FontWeight.Light)
                 }
 
                 Spacer(Modifier.weight(1f))
@@ -120,7 +123,8 @@ internal fun DogsTypeScreen(
                 IconButton(onClick = { onTrash(it.id) }) {
                     Icon(
                         Icons.Rounded.Delete,
-                        contentDescription = null
+                        contentDescription = null,
+                        tint = Color.Red
                     )
                 }
             }
