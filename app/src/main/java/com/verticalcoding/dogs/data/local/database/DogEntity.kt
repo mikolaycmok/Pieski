@@ -8,8 +8,8 @@ import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
 
 // This is a model class for the database
-@Entity
-data class Dog(
+@Entity(tableName = "dogs")
+data class DogEntity(
     val name: String
 ) {
     @PrimaryKey(autoGenerate=true)
@@ -18,14 +18,14 @@ data class Dog(
 
 // Dao basically does all the operations on the database for given model
 @Dao
-interface DogDao {
+interface DogEntityDao {
 
-    @Query("SELECT * FROM dog")
-    fun getAllDogs(): Flow<List<Dog>>
+    @Query("SELECT * FROM dogs")
+    fun getAllDogs(): Flow<List<DogEntity>>
 
-    @Query("SELECT * FROM dog ORDER BY uid DESC LIMIT 10")
-    fun getSortedDogs(): Flow<List<Dog>>
+    @Query("SELECT * FROM dogs ORDER BY uid DESC LIMIT 10")
+    fun getSortedDogs(): Flow<List<DogEntity>>
 
     @Insert
-    suspend fun insertDog(dog: Dog)
+    suspend fun insertDog(dog: DogEntity)
 }

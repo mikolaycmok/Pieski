@@ -3,6 +3,7 @@ package com.verticalcoding.dogs.ui.dogs
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.verticalcoding.dogs.data.DogRepository
+import com.verticalcoding.dogs.data.models.Dog
 import com.verticalcoding.dogs.ui.dogs.UiState.Loading
 import com.verticalcoding.dogs.ui.dogs.UiState.Success
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,7 +21,8 @@ class DogsViewModel @Inject constructor(
 ) : ViewModel() {
 
     val uiState: StateFlow<UiState> = dogRepository
-        .dogs.map<List<String>, UiState>(::Success)
+        .dogs
+        .map<List<Dog>, UiState> { Success(data = it) }
         .catch { emit(UiState.Error(it)) }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), Loading)
 
@@ -29,10 +31,14 @@ class DogsViewModel @Inject constructor(
             dogRepository.add(name)
         }
     }
+
+    fun removeDog(id: Int) {
+
+    }
 }
 
 sealed interface UiState {
     object Loading: UiState
     data class Error(val throwable: Throwable): UiState
-    data class Success(val data: List<String>): UiState
+    data class Success(val data: List<Dog>): UiState
 }

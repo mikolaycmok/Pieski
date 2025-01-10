@@ -1,6 +1,7 @@
-package com.verticalcoding.dogs.ui
+package com.verticalcoding
 
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -14,7 +15,14 @@ fun MainNavigation() {
     val navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = "main") {
-        composable("main") { DogsScreen(modifier = Modifier.padding(16.dp)) }
-        // TODO: Add more destinations
+        composable("main") {
+            DogsScreen(
+                modifier = Modifier.padding(16.dp),
+                navigationController = navController
+            )
+        }
+        composable("details") {
+            Text("Here will be a doggo :)")
+        }
     }
 }
