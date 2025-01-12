@@ -1,5 +1,7 @@
 package com.verticalcoding.dogs.data.di
 
+import com.verticalcoding.dogs.data.DefaultDogRepository
+import com.verticalcoding.dogs.data.DogRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -13,6 +15,6 @@ interface DataModule {
     @Singleton // Dagger will make sure in this scenario that this is single instance
     @Binds // This will bind all places Injecting dogRepository interface to the Default implementation
     fun bindsDogRepository(
-        dogRepository: com.verticalcoding.dogs.data.DefaultDogRepository
-    ) : com.verticalcoding.dogs.data.DogRepository
+        dogRepository: DefaultDogRepository
+    ): DogRepository
 }
