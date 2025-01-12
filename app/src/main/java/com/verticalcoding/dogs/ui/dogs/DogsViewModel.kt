@@ -10,6 +10,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -35,6 +36,12 @@ class DogsViewModel @Inject constructor(
     fun removeDog(id: Int) {
         viewModelScope.launch {
             dogRepository.remove(id)
+        }
+    }
+
+    fun triggerFav(id: Int) {
+        viewModelScope.launch {
+            dogRepository.triggerFav(id)
         }
     }
 }

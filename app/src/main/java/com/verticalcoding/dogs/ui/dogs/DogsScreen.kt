@@ -11,7 +11,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.rounded.Delete
+import androidx.compose.material.icons.rounded.Favorite
 import androidx.compose.material.icons.rounded.FavoriteBorder
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
@@ -51,6 +53,7 @@ fun DogsScreen(
             items = (items as UiState.Success).data,
             onSave = viewModel::addDog,
             onTrash = viewModel::removeDog,
+            onFav = viewModel::triggerFav,
             onRowClick = { navigationController.navigate("details") },
             modifier = modifier
         )
@@ -61,6 +64,7 @@ fun DogsScreen(
 internal fun DogsTypeScreen(
     items: List<Dog>,
     onSave: (name: String) -> Unit,
+    onFav: (id: Int) -> Unit,
     onTrash: (id: Int) -> Unit,
     onRowClick: () -> Unit,
     modifier: Modifier = Modifier
@@ -104,10 +108,10 @@ internal fun DogsTypeScreen(
 
                 Spacer(Modifier.weight(1f))
 
-                IconButton(onClick = { onTrash(it.id) }
+                IconButton(onClick = { onFav(it.id) }
                 ) {
                     Icon(
-                        Icons.Rounded.FavoriteBorder,
+                        if (it.isFav) Icons.Rounded.Favorite else Icons.Rounded.FavoriteBorder,
                         contentDescription = null,
                         modifier = Modifier
                             .graphicsLayer(alpha = 0.99f)
